@@ -12,7 +12,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    connectToDB();
+    await connectToDB(); // Ensure to await DB connection
 
     const products = await Product.find({});
     if (!products) throw new Error("No product found");
@@ -68,11 +68,19 @@ export async function GET() {
         return updatedProduct;
       })
     );
+
+    // Return success response
     return NextResponse.json({
       message: "Ok",
       data: updatedProducts,
     });
   } catch (error) {
     console.log(error);
+
+    // Return an error response
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
