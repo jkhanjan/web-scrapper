@@ -6,7 +6,8 @@ import Image from "next/image";
 import React from "react";
 
 const Page = async () => {
-  const allProducts = await getAllProducts();
+  const allProducts = (await getAllProducts()) || [];
+
   // console.log("all products", allProducts);
 
   return (
@@ -40,14 +41,14 @@ const Page = async () => {
 
       <section className="trending-section">
         <h2 className="section-text">Trending</h2>
-        {allProducts?.length > 0 ? (
+        {(allProducts ?? []).length > 0 ? (
           <div className="flex flex-wrap gap-x-8 gap-y-16">
             {allProducts.map((product) => (
               <ProductCards key={product._id} product={product} />
             ))}
           </div>
         ) : (
-          <p>No trending products found.</p> // Fallback for no products
+          <p>No products available.</p>
         )}
       </section>
     </>
