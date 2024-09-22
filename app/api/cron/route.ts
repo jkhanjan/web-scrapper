@@ -76,7 +76,7 @@ export async function GET() {
       message: "Ok",
       data: updatedProducts,
     });
-  } catch (error) {
+  } catch (error:any) {
     console.log(error);
 
     // Return an error response
