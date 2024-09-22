@@ -9,7 +9,7 @@ import {
   getLowestPrice,
 } from "@/lib/utils";
 import { NextResponse } from "next/server";
-export const maxDuration = 300;
+export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export async function GET() {
@@ -76,7 +76,7 @@ export async function GET() {
       message: "Ok",
       data: updatedProducts,
     });
-  } catch (error:any) {
+  } catch (error: any) {
     console.log(error);
 
     // Return an error response
